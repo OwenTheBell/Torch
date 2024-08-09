@@ -1,0 +1,91 @@
+[gd_scene load_steps=8 format=3 uid="uid://dxxt80ic3ug5y"]
+
+[ext_resource type="Script" path="res://Enemy Behavior/States/EnemyStateControl.gd" id="1_u51f1"]
+[ext_resource type="Script" path="res://Enemy Behavior/States/MoveTowardsGroupState.gd" id="2_0uych"]
+[ext_resource type="Script" path="res://Enemy Behavior/Transitions/EnterExitTransition.gd" id="3_bcsn4"]
+[ext_resource type="Script" path="res://Enemy Behavior/States/RunAwayFromCollisionState.gd" id="4_hqjwl"]
+[ext_resource type="Script" path="res://Time Control/TickReceiver.gd" id="6_f71vu"]
+[ext_resource type="Script" path="res://Enemy Behavior/Transitions/DistanceFromGroupTransition.gd" id="6_kan6v"]
+[ext_resource type="Script" path="res://Enemy Behavior/GameOverOnContactWithPlayer.gd" id="7_jlfam"]
+
+[node name="State test enemy" type="CharacterBody2D"]
+scale = Vector2(0.8, 0.8)
+collision_layer = 8
+collision_mask = 31
+
+[node name="TickReceiver" type="Node" parent="."]
+script = ExtResource("6_f71vu")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(16, 2.08165e-12)
+color = Color(1.38866e-06, 0.64301, 0.290809, 1)
+polygon = PackedVector2Array(64, 2.08165e-12, -26, 32, -64, 2.08165e-12, -26, -32)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(16, 2.08165e-12)
+polygon = PackedVector2Array(64, 2.08165e-12, -26, 32, -64, 2.08165e-12, -26, -32)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(16, 2.08165e-12)
+collision_mask = 50
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+scale = Vector2(1.1, 1.1)
+polygon = PackedVector2Array(64, 2.08165e-12, -26, 32, -64, 2.08165e-12, -26, -32)
+
+[node name="EnemyStateControl" type="Node" parent="."]
+script = ExtResource("1_u51f1")
+
+[node name="MoveTowardsPlayerState" type="Node" parent="EnemyStateControl"]
+script = ExtResource("2_0uych")
+group = "player"
+closest_only = true
+speed = 300.0
+
+[node name="Transition to run away" type="Node" parent="EnemyStateControl/MoveTowardsPlayerState" node_paths=PackedStringArray("ToState")]
+script = ExtResource("3_bcsn4")
+collision_index = 6
+entered = true
+ToState = NodePath("../../RunAwayFromLightState")
+
+[node name="Transition to freeze" type="Node" parent="EnemyStateControl/MoveTowardsPlayerState" node_paths=PackedStringArray("ToState")]
+script = ExtResource("3_bcsn4")
+collision_index = 5
+entered = true
+ToState = NodePath("../../FreezeInTheLightState")
+
+[node name="RunAwayFromLightState" type="Node" parent="EnemyStateControl"]
+script = ExtResource("4_hqjwl")
+collision_layer = 6
+speed = 600.0
+
+[node name="Transition to move towards player" type="Node" parent="EnemyStateControl/RunAwayFromLightState" node_paths=PackedStringArray("ToState")]
+script = ExtResource("6_kan6v")
+group = "player"
+closest_only = true
+distance = 1000.0
+ToState = NodePath("../../MoveTowardsPlayerState")
+
+[node name="FreezeInTheLightState" type="Node" parent="EnemyStateControl"]
+script = ExtResource("2_0uych")
+group = "player"
+closest_only = true
+
+[node name="Transtion to run away" type="Node" parent="EnemyStateControl/FreezeInTheLightState" node_paths=PackedStringArray("ToState")]
+script = ExtResource("3_bcsn4")
+collision_index = 6
+entered = true
+ToState = NodePath("../../RunAwayFromLightState")
+
+[node name="Transition to move towards player" type="Node" parent="EnemyStateControl/FreezeInTheLightState" node_paths=PackedStringArray("ToState")]
+script = ExtResource("3_bcsn4")
+collision_index = 5
+ToState = NodePath("../../MoveTowardsPlayerState")
+
+[node name="DistanceFromGroupTransition" type="Node" parent="EnemyStateControl"]
+script = ExtResource("6_kan6v")
+
+[node name="GameOverOnContactWithPlayer" type="Node" parent="."]
+script = ExtResource("7_jlfam")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

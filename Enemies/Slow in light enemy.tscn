@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5pbq8nvnnfj3"]
+
+[ext_resource type="Script" path="res://Time Control/TickReceiver.gd" id="2_c3a83"]
+[ext_resource type="Script" path="res://Enemy Behavior/GameOverOnContactWithPlayer.gd" id="3_wkp6i"]
+[ext_resource type="Script" path="res://Enemy Behavior/States/EnemyStateControl.gd" id="4_b8eyr"]
+[ext_resource type="Script" path="res://Enemy Behavior/States/MoveTowardsGroupState.gd" id="5_kid4l"]
+[ext_resource type="Script" path="res://Enemy Behavior/Transitions/EnterExitTransition.gd" id="6_kg3xf"]
+
+[node name="Slow in light enemy" type="CharacterBody2D"]
+position = Vector2(0, 1)
+scale = Vector2(0.9, 0.9)
+collision_layer = 8
+collision_mask = 31
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-30, 2.08165e-12)
+color = Color(0.428985, 0.000919333, 0.578832, 1)
+polygon = PackedVector2Array(64, -10, 50, -64, 40, -60, 2.08165e-12, -10, -64, 2.08165e-12, 2.08165e-12, 10, 40, 60, 50, 64, 64, 10)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-30, 2.08165e-12)
+polygon = PackedVector2Array(64, -10, 50, -64, 40, -60, 2.08165e-12, -10, -64, 2.08165e-12, 2.08165e-12, 10, 40, 60, 50, 64, 64, 10)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(2.08165e-12, 2.08165e-12)
+collision_mask = 50
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(-33, 2.08165e-12)
+scale = Vector2(1.1, 1.1)
+polygon = PackedVector2Array(64, -10, 50, -64, 40, -60, 2.08165e-12, -10, -64, 2.08165e-12, 2.08165e-12, 10, 40, 60, 50, 64, 64, 10)
+
+[node name="TickReceiver" type="Node" parent="."]
+script = ExtResource("2_c3a83")
+
+[node name="GameOverOnContactWithPlayer" type="Node" parent="."]
+script = ExtResource("3_wkp6i")
+
+[node name="EnemyStateControl" type="Node" parent="."]
+script = ExtResource("4_b8eyr")
+
+[node name="Move in the dark state" type="Node" parent="EnemyStateControl"]
+script = ExtResource("5_kid4l")
+group = "player"
+closest_only = true
+speed = 250.0
+
+[node name="Transition to in light" type="Node" parent="EnemyStateControl/Move in the dark state" node_paths=PackedStringArray("ToState")]
+script = ExtResource("6_kg3xf")
+collision_index = 5
+entered = true
+ToState = NodePath("../../Move in light state")
+
+[node name="Move in light state" type="Node" parent="EnemyStateControl"]
+script = ExtResource("5_kid4l")
+group = "player"
+closest_only = true
+speed = 150.0
+
+[node name="Transition to in the dark" type="Node" parent="EnemyStateControl/Move in light state" node_paths=PackedStringArray("ToState")]
+script = ExtResource("6_kg3xf")
+collision_index = 5
+ToState = NodePath("../../Move in the dark state")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

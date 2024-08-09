@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://be2f5ipwiihn5"]
+
+[ext_resource type="Script" path="res://Player/PlayerMovement.gd" id="1_w3c8f"]
+[ext_resource type="PackedScene" uid="uid://c1msdhh413ae6" path="res://Player/Lights/torch light.tscn" id="2_4n5j0"]
+[ext_resource type="Script" path="res://Player/Lights/Torch Thrower.gd" id="3_4im1u"]
+[ext_resource type="PackedScene" uid="uid://dgmd3nm5txpqh" path="res://Player/Lights/torch.tscn" id="4_n8h6s"]
+[ext_resource type="Script" path="res://Time Control/SendTickOnMove.gd" id="5_m872l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wjg20"]
+radius = 64.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yoi7e"]
+size = Vector2(110, 120)
+
+[sub_resource type="Gradient" id="Gradient_ndpbp"]
+offsets = PackedFloat32Array(0, 0.687356)
+colors = PackedColorArray(0.90172, 0.90172, 0.90172, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5y05d"]
+gradient = SubResource("Gradient_ndpbp")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+script = ExtResource("1_w3c8f")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+scale = Vector2(0.5, 0.5)
+color = Color(0, 0, 1, 1)
+polygon = PackedVector2Array(64, 2.08165e-12, 50, 64, -64, 64, -64, -64, 50, -64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_wjg20")
+
+[node name="Hit Box" type="Area2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hit Box"]
+position = Vector2(-5, 0)
+shape = SubResource("RectangleShape2D_yoi7e")
+debug_color = Color(8.64036e-07, 0.647778, 0.201317, 0.42)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.75, 0.75)
+
+[node name="Torch Thrower" type="Node2D" parent="." node_paths=PackedStringArray("held_light", "mini_light")]
+script = ExtResource("3_4im1u")
+torch = ExtResource("4_n8h6s")
+held_light = NodePath("torch light")
+mini_light = NodePath("mini light")
+
+[node name="torch light" parent="Torch Thrower" instance=ExtResource("2_4n5j0")]
+
+[node name="mini light" type="PointLight2D" parent="Torch Thrower"]
+energy = 0.5
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 1.5
+texture = SubResource("GradientTexture2D_5y05d")
+offset = Vector2(0.5, 0.5)
+texture_scale = 0.75
+
+[node name="SendTickOnMove" type="Node" parent="."]
+script = ExtResource("5_m872l")
+
+[connection signal="body_entered" from="Hit Box" to="." method="_on_hit_box_body_entered"]
