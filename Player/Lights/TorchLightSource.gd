@@ -13,26 +13,26 @@ var starting_scale
 var starting_energy
 
 func _ready():
-    is_lit = true
-    remaining_time = duration
-    starting_scale = scale
-    starting_energy = energy
+  is_lit = true
+  remaining_time = duration
+  starting_scale = scale
+  starting_energy = energy
     
 
 func on_tick(delta):
-    if not is_lit:
-        return
-    remaining_time -= delta
-    var percent_radius = (1 - minimum_radius) * (remaining_time / duration) + minimum_radius
-    scale = starting_scale * percent_radius
-    var percent_energy = (1 - minimum_light) * (remaining_time / duration) + minimum_light
-    energy = starting_energy * percent_energy
+  if not is_lit:
+    return
+  remaining_time -= delta
+  var percent_radius = (1 - minimum_radius) * (remaining_time / duration) + minimum_radius
+  scale = starting_scale * percent_radius
+  var percent_energy = (1 - minimum_light) * (remaining_time / duration) + minimum_light
+  energy = starting_energy * percent_energy
 
 
 func ignite():
-    is_lit = true
+  is_lit = true
 
 
 func extinguish():
-    is_lit = false
-    on_extinguish.emit()
+  is_lit = false
+  on_extinguish.emit()
