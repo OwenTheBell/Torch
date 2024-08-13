@@ -1,16 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://be2f5ipwiihn5"]
+[gd_scene load_steps=12 format=3 uid="uid://be2f5ipwiihn5"]
 
 [ext_resource type="Script" path="res://Player/PlayerMovement.gd" id="1_w3c8f"]
 [ext_resource type="PackedScene" uid="uid://c1msdhh413ae6" path="res://Player/Lights/torch light.tscn" id="2_4n5j0"]
 [ext_resource type="Script" path="res://Player/Lights/Torch Thrower.gd" id="3_4im1u"]
 [ext_resource type="PackedScene" uid="uid://dgmd3nm5txpqh" path="res://Player/Lights/torch.tscn" id="4_n8h6s"]
 [ext_resource type="Script" path="res://Time Control/SendTickOnMove.gd" id="5_m872l"]
+[ext_resource type="Script" path="res://Player/InteractExecuter.gd" id="6_l8nei"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wjg20"]
 radius = 64.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yoi7e"]
 size = Vector2(110, 120)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2du28"]
+radius = 45.0
 
 [sub_resource type="Gradient" id="Gradient_ndpbp"]
 offsets = PackedFloat32Array(0, 0.687356)
@@ -45,6 +49,13 @@ position = Vector2(-5, 0)
 shape = SubResource("RectangleShape2D_yoi7e")
 debug_color = Color(8.64036e-07, 0.647778, 0.201317, 0.42)
 
+[node name="Interaction Box" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction Box"]
+shape = SubResource("CircleShape2D_2du28")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.75, 0.75)
 
@@ -68,4 +79,10 @@ texture_scale = 0.75
 [node name="SendTickOnMove" type="Node" parent="."]
 script = ExtResource("5_m872l")
 
+[node name="InteractExecuter" type="Node" parent="."]
+script = ExtResource("6_l8nei")
+hold_time = 1.0
+
 [connection signal="body_entered" from="Hit Box" to="." method="_on_hit_box_body_entered"]
+[connection signal="body_entered" from="Interaction Box" to="InteractExecuter" method="_on_body_entered"]
+[connection signal="body_exited" from="Interaction Box" to="InteractExecuter" method="_on_body_exited"]
