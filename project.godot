@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Dispatcher="*res://Dispatcher.gd"
 TickControl="*res://Time Control/TickControl.gd"
+Inventory="*res://Inventory.gd"
 
 [display]
 
