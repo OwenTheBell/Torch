@@ -15,7 +15,7 @@ var starting_energy
 func _ready():
     is_lit = true
     remaining_time = duration
-    starting_scale = texture_scale
+    starting_scale = scale
     starting_energy = energy
     
 
@@ -24,7 +24,7 @@ func on_tick(delta):
         return
     remaining_time -= delta
     var percent_radius = (1 - minimum_radius) * (remaining_time / duration) + minimum_radius
-    texture_scale = starting_scale * percent_radius
+    scale = starting_scale * percent_radius
     var percent_energy = (1 - minimum_light) * (remaining_time / duration) + minimum_light
     energy = starting_energy * percent_energy
 
