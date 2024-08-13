@@ -1,4 +1,4 @@
-class_name TorchLight extends PointLight2D
+class_name TorchLightSource extends PointLight2D
 
 signal on_extinguish
 
@@ -30,8 +30,9 @@ func on_tick(delta):
 
 
 func ignite():
-    pass
+    is_lit = true
 
 
 func extinguish():
-    pass
+    is_lit = false
+    on_extinguish.emit()
