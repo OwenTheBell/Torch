@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://s8jpejd63pux"]
+[gd_scene load_steps=12 format=3 uid="uid://s8jpejd63pux"]
 
 [ext_resource type="PackedScene" uid="uid://c06huod6isw3j" path="res://Lights/decaying_torch_light.tscn" id="3_ed0g6"]
 [ext_resource type="Script" path="res://Interaction/InteractReceiver.gd" id="5_ciluo"]
 [ext_resource type="Script" path="res://Time Control/TickReceiver.gd" id="5_e2i6o"]
+[ext_resource type="Script" path="res://Interaction/HaltAction.gd" id="6_gv4ev"]
 [ext_resource type="Script" path="res://Interaction/CollisionToggle.gd" id="7_r2rjv"]
 [ext_resource type="Script" path="res://Interaction/PickupAction.gd" id="7_r6nqt"]
 [ext_resource type="Script" path="res://Time Control/SendTickOnMove.gd" id="8_4sfrb"]
@@ -64,11 +65,15 @@ speed = 100
 script = ExtResource("9_supdo")
 input_name = "SecondaryAction"
 
+[node name="HaltAction" type="Node" parent="."]
+script = ExtResource("6_gv4ev")
+
 [node name="SendTickOnMove" type="Node" parent="."]
 script = ExtResource("8_4sfrb")
 
 [connection signal="on_pickup" from="PickupAction" to="decaying_torch_light" method="extinguish"]
 [connection signal="on_pickup" from="PickupAction" to="Toggle Interaction Collision" method="toggle_off"]
+[connection signal="on_pickup" from="PickupAction" to="HaltAction" method="halt"]
 [connection signal="on_interact" from="PickupAction/InteractReceiver" to="PickupAction" method="on_interact"]
 [connection signal="on_throw" from="ThrowAction" to="Toggle Interaction Collision" method="toggle_on"]
 [connection signal="execute" from="ThrowAction/PrimaryAction InputReceiver" to="ThrowAction" method="throw"]
