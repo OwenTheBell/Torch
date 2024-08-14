@@ -17,22 +17,30 @@ func _ready():
   remaining_time = duration
   starting_scale = scale
   starting_energy = energy
+  extinguish()
     
 
 func on_tick(delta):
   if not is_lit:
     return
   remaining_time -= delta
-  var percent_radius = (1 - minimum_radius) * (remaining_time / duration) + minimum_radius
-  scale = starting_scale * percent_radius
-  var percent_energy = (1 - minimum_light) * (remaining_time / duration) + minimum_light
-  energy = starting_energy * percent_energy
+  update_light()
 
 
 func ignite():
   is_lit = true
+  update_light()
 
 
 func extinguish():
   is_lit = false
+  energy = 0
+  scale = Vector2.ZERO
   on_extinguish.emit()
+
+
+func update_light():
+  var percent_radius = (1 - minimum_radius) * (remaining_time / duration) + minimum_radius
+  scale = starting_scale * percent_radius
+  var percent_energy = (1 - minimum_light) * (remaining_time / duration) + minimum_light
+  energy = starting_energy * percent_energy

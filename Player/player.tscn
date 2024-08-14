@@ -1,11 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://be2f5ipwiihn5"]
+[gd_scene load_steps=10 format=3 uid="uid://be2f5ipwiihn5"]
 
 [ext_resource type="Script" path="res://Player/PlayerMovement.gd" id="1_w3c8f"]
-[ext_resource type="PackedScene" uid="uid://c1msdhh413ae6" path="res://Player/Lights/torch light.tscn" id="2_4n5j0"]
-[ext_resource type="Script" path="res://Player/Lights/Torch Thrower.gd" id="3_4im1u"]
-[ext_resource type="PackedScene" uid="uid://dgmd3nm5txpqh" path="res://Player/Lights/torch.tscn" id="4_n8h6s"]
+[ext_resource type="Script" path="res://Player/TorchHolder.gd" id="5_2xtvf"]
 [ext_resource type="Script" path="res://Time Control/SendTickOnMove.gd" id="5_m872l"]
-[ext_resource type="Script" path="res://Player/InteractExecuter.gd" id="6_l8nei"]
+[ext_resource type="Script" path="res://Interaction/InteractExecuter.gd" id="6_ypl7j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wjg20"]
 radius = 64.0
@@ -59,15 +57,11 @@ shape = SubResource("CircleShape2D_2du28")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.75, 0.75)
 
-[node name="Torch Thrower" type="Node2D" parent="." node_paths=PackedStringArray("held_light", "mini_light")]
-script = ExtResource("3_4im1u")
-torch = ExtResource("4_n8h6s")
-held_light = NodePath("torch light")
-mini_light = NodePath("mini light")
+[node name="TorchHolder" type="Node2D" parent="." node_paths=PackedStringArray("default_light")]
+script = ExtResource("5_2xtvf")
+default_light = NodePath("mini light")
 
-[node name="torch light" parent="Torch Thrower" instance=ExtResource("2_4n5j0")]
-
-[node name="mini light" type="PointLight2D" parent="Torch Thrower"]
+[node name="mini light" type="PointLight2D" parent="TorchHolder"]
 energy = 0.5
 shadow_enabled = true
 shadow_filter = 1
@@ -80,7 +74,7 @@ texture_scale = 0.75
 script = ExtResource("5_m872l")
 
 [node name="InteractExecuter" type="Node" parent="."]
-script = ExtResource("6_l8nei")
+script = ExtResource("6_ypl7j")
 hold_time = 1.0
 
 [connection signal="body_entered" from="Hit Box" to="." method="_on_hit_box_body_entered"]

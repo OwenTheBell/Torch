@@ -14,13 +14,16 @@ func _process(delta):
 
 func pickup(node: Node2D):
   held_nodes.append(node)
-  print("picked up " + node.name)
+  node.visible = false
+  node.process_mode = Node.PROCESS_MODE_DISABLED
 
 
-func get_next_node(node: Node2D):
+func get_next_node():
   if held_nodes.size() > 0:
-    node = held_nodes[0]
+    var node = held_nodes[0]
     held_nodes.remove_at(0)
-    return true
+    node.visible = true
+    node.process_mode = Node.PROCESS_MODE_INHERIT
+    return node
   else:
-    return false
+    return null
