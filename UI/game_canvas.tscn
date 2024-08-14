@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctdvy21seh15m"]
+[gd_scene load_steps=10 format=3 uid="uid://ctdvy21seh15m"]
 
 [ext_resource type="Script" path="res://UI/FillRectWithFloatVariable.gd" id="2_5hgx2"]
 [ext_resource type="Resource" uid="uid://dwphl15fbqgxx" path="res://Variables/torches_in_inventory_int.tres" id="2_huq14"]
 [ext_resource type="Script" path="res://UI/DisplayVariableInLabel.gd" id="2_s5d08"]
 [ext_resource type="Resource" uid="uid://b10h46564iadh" path="res://Variables/interaction_percent_float.tres" id="3_2j6sc"]
 [ext_resource type="Resource" uid="uid://ceunlfdtbqlf8" path="res://Variables/interaction_name_string.tres" id="3_uca4h"]
+[ext_resource type="Script" path="res://UI/SetVisibilityFromBool.gd" id="6_hpkhb"]
+[ext_resource type="Resource" uid="uid://bxj2pm7pyvf0e" path="res://Variables/has_interaction_bool.tres" id="7_onkip"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_28rgr"]
 font_size = 30
@@ -96,3 +98,7 @@ color = Color(1, 0, 0, 1)
 script = ExtResource("2_5hgx2")
 rect = NodePath("..")
 variable = ExtResource("3_2j6sc")
+
+[node name="SetVisibilityFromBool" type="Node" parent="Interaction Display"]
+script = ExtResource("6_hpkhb")
+bool_var = ExtResource("7_onkip")

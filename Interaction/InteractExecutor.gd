@@ -2,6 +2,7 @@ class_name InteractExecutor extends Node
 
 @export var hold_time: float
 @export var tick_on_hold: bool
+@export var has_interaction_var: BoolVariable
 @export var description_var: StringVariable
 @export var percent_var: FloatVariable
 
@@ -9,6 +10,9 @@ var receivers: Array[Node]
 var elapsed_hold: float = 0
 
 var executing = false
+
+func _ready():
+  update_description()
 
 func _process(delta):
   if Input.is_action_just_pressed("Interact") and not executing and receivers.size() > 0:
@@ -56,5 +60,7 @@ func remove_receiver(receiver: Node):
 func update_description():
   if receivers.size() > 0:
     description_var.value = receivers[receivers.size() - 1].interact_description
+    has_interaction_var.value = true
   else:
     description_var.value = ""
+    has_interaction_var.value = false
