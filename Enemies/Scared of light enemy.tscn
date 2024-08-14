@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://cq1n7ain4r785"]
 
-[ext_resource type="Script" path="res://Enemy Behavior/States/EnemyStateControl.gd" id="2_3jrmk"]
-[ext_resource type="Script" path="res://Enemy Behavior/States/MoveTowardsGroupState.gd" id="3_i55bc"]
-[ext_resource type="Script" path="res://Enemy Behavior/Transitions/EnterExitTransition.gd" id="4_chmx5"]
-[ext_resource type="Script" path="res://Enemy Behavior/States/RunAwayFromCollisionState.gd" id="5_1rvwg"]
-[ext_resource type="Script" path="res://Enemy Behavior/Transitions/DistanceFromGroupTransition.gd" id="6_t7cbq"]
+[ext_resource type="Script" path="res://Enemies/Enemy Behavior/States/EnemyStateControl.gd" id="2_3jrmk"]
+[ext_resource type="Script" path="res://Enemies/Enemy Behavior/States/MoveTowardsGroupState.gd" id="3_i55bc"]
+[ext_resource type="Script" path="res://Enemies/Enemy Behavior/Transitions/EnterExitTransition.gd" id="4_chmx5"]
+[ext_resource type="Script" path="res://Enemies/Enemy Behavior/States/RunAwayFromCollisionState.gd" id="5_1rvwg"]
+[ext_resource type="Script" path="res://Enemies/Enemy Behavior/Transitions/DistanceFromGroupTransition.gd" id="6_t7cbq"]
 [ext_resource type="Script" path="res://Time Control/TickReceiver.gd" id="7_btvos"]
-[ext_resource type="Script" path="res://Enemy Behavior/GameOverOnContactWithPlayer.gd" id="7_qcfbx"]
+[ext_resource type="Script" path="res://Enemies/Enemy Behavior/GameOverOnContactWithPlayer.gd" id="7_qcfbx"]
 
 [node name="Scared of light enemy" type="CharacterBody2D"]
 scale = Vector2(0.8, 0.8)

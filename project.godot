@@ -17,9 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Dispatcher="*res://Dispatcher.gd"
+Dispatcher="*res://Singletons & Managers/Dispatcher.gd"
 TickControl="*res://Time Control/TickControl.gd"
-Inventory="*res://Inventory.gd"
+Inventory="*res://Singletons & Managers/Inventory.gd"
 
 [display]
 

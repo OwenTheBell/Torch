@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://b5pbq8nvnnfj3"]
 
 [ext_resource type="Script" path="res://Time Control/TickReceiver.gd" id="2_c3a83"]
-[ext_resource type="Script" path="res://Enemy Behavior/GameOverOnContactWithPlayer.gd" id="3_wkp6i"]
-[ext_resource type="Script" path="res://Enemy Behavior/States/EnemyStateControl.gd" id="4_b8eyr"]
-[ext_resource type="Script" path="res://Enemy Behavior/States/MoveTowardsGroupState.gd" id="5_kid4l"]
-[ext_resource type="Script" path="res://Enemy Behavior/Transitions/EnterExitTransition.gd" id="6_kg3xf"]
+[ext_resource type="Script" path="res://Enemies/Enemy Behavior/GameOverOnContactWithPlayer.gd" id="3_wkp6i"]
+[ext_resource type="Script" path="res://Enemies/Enemy Behavior/States/EnemyStateControl.gd" id="4_b8eyr"]
+[ext_resource type="Script" path="res://Enemies/Enemy Behavior/States/MoveTowardsGroupState.gd" id="5_kid4l"]
+[ext_resource type="Script" path="res://Enemies/Enemy Behavior/Transitions/EnterExitTransition.gd" id="6_kg3xf"]
 
 [node name="Slow in light enemy" type="CharacterBody2D"]
 position = Vector2(0, 1)
