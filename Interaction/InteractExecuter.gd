@@ -13,7 +13,8 @@ func _process(delta):
     executing = true
   if Input.is_action_pressed("Interact") and executing:
     elapsed_hold += delta
-    TickControl.send_tick()
+    if tick_on_hold:
+      TickControl.send_tick()
     if elapsed_hold >= hold_time:
       receivers[receivers.size() - 1].interact()
       elapsed_hold = 0

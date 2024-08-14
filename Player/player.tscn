@@ -76,6 +76,7 @@ script = ExtResource("5_m872l")
 [node name="InteractExecuter" type="Node" parent="."]
 script = ExtResource("6_ypl7j")
 hold_time = 1.0
+tick_on_hold = true
 
 [connection signal="body_entered" from="Hit Box" to="." method="_on_hit_box_body_entered"]
 [connection signal="body_entered" from="Interaction Box" to="InteractExecuter" method="_on_body_entered"]
