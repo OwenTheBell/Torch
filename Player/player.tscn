@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://be2f5ipwiihn5"]
+[gd_scene load_steps=12 format=3 uid="uid://be2f5ipwiihn5"]
 
 [ext_resource type="Script" path="res://Player/PlayerMovement.gd" id="1_w3c8f"]
 [ext_resource type="Script" path="res://Player/TorchHolder.gd" id="5_2xtvf"]
+[ext_resource type="Resource" uid="uid://ceunlfdtbqlf8" path="res://Variables/interaction_name_string.tres" id="5_6jmxb"]
 [ext_resource type="Script" path="res://Time Control/SendTickOnMove.gd" id="5_m872l"]
+[ext_resource type="Resource" uid="uid://b10h46564iadh" path="res://Variables/interaction_percent_float.tres" id="5_rtpf4"]
 [ext_resource type="Script" path="res://Interaction/InteractExecuter.gd" id="6_ypl7j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wjg20"]
@@ -60,6 +62,7 @@ zoom = Vector2(0.75, 0.75)
 [node name="TorchHolder" type="Node2D" parent="." node_paths=PackedStringArray("default_light")]
 script = ExtResource("5_2xtvf")
 default_light = NodePath("mini light")
+interact_description = "Light Torch"
 
 [node name="mini light" type="PointLight2D" parent="TorchHolder"]
 energy = 0.5
@@ -77,6 +80,8 @@ script = ExtResource("5_m872l")
 script = ExtResource("6_ypl7j")
 hold_time = 1.0
 tick_on_hold = true
+description_var = ExtResource("5_6jmxb")
+percent_var = ExtResource("5_rtpf4")
 
 [connection signal="body_entered" from="Hit Box" to="." method="_on_hit_box_body_entered"]
 [connection signal="body_entered" from="Interaction Box" to="InteractExecuter" method="_on_body_entered"]

@@ -2,16 +2,24 @@ class_name TorchHolder extends Node2D
 
 @export var default_light: PointLight2D
 
+@export var interact_description: String
+
 var held_torch: Node2D
+var executer: InteractExecuter
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-  get_parent().get_node("InteractExecuter").add_receiver(self)
+  executer = get_parent().get_node("InteractExecuter") as InteractExecuter
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+  if Inventory.held_nodes.size() == 0:
+    executer.remove_receiver(self)
+  else:
+    executer.add_receiver(self)
+  
   if not is_instance_valid(held_torch):
     return
   if Input.is_action_just_pressed("PrimaryAction"):

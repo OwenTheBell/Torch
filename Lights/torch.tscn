@@ -49,6 +49,7 @@ script = ExtResource("7_r6nqt")
 
 [node name="InteractReceiver" type="Node" parent="PickupAction"]
 script = ExtResource("5_ciluo")
+interact_description = "Pickup Torch"
 
 [node name="ThrowAction" type="Node" parent="."]
 script = ExtResource("8_mudjh")
