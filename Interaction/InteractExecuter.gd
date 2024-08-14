@@ -21,13 +21,14 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-  if body.has_node("InteractReceiver"):
-    add_receiver(body.get_node("InteractReceiver"))
+  var node = body.find_child("InteractReceiver")
+  if is_instance_valid(node):
+    add_receiver(node)
 
 
 func _on_body_exited(body):
-  if body.has_node("InteractReceiver"):
-    var node = body.get_node("InteractReceiver")
+  var node = body.find_child("InteractReceiver")
+  if is_instance_valid(node):
     var index = receivers.find(node)
     if index >= 0:
       receivers.remove_at(index)
