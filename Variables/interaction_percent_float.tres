@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="FloatVariable" load_steps=2 format=3 uid="uid://b10h46564iadh"]
+
+[ext_resource type="Script" path="res://Variables/Scripts/FloatVariable.gd" id="1_dap6u"]
+
+[resource]
+script = ExtResource("1_dap6u")
+value = 0.0

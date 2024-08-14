@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="StringVariable" load_steps=2 format=3 uid="uid://ceunlfdtbqlf8"]
+
+[ext_resource type="Script" path="res://Variables/Scripts/StringVariable.gd" id="1_xlmub"]
+
+[resource]
+script = ExtResource("1_xlmub")
+value = ""
