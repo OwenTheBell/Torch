@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://ctdvy21seh15m"]
 
-[ext_resource type="Script" path="res://UI/DisplayTorchesRemaining.gd" id="1_eww63"]
 [ext_resource type="Script" path="res://UI/FillRectWithFloatVariable.gd" id="2_5hgx2"]
+[ext_resource type="Resource" uid="uid://dwphl15fbqgxx" path="res://Variables/torches_in_inventory_int.tres" id="2_huq14"]
 [ext_resource type="Script" path="res://UI/DisplayVariableInLabel.gd" id="2_s5d08"]
 [ext_resource type="Resource" uid="uid://b10h46564iadh" path="res://Variables/interaction_percent_float.tres" id="3_2j6sc"]
 [ext_resource type="Resource" uid="uid://ceunlfdtbqlf8" path="res://Variables/interaction_name_string.tres" id="3_uca4h"]
@@ -28,9 +28,10 @@ text = "0"
 label_settings = SubResource("LabelSettings_28rgr")
 horizontal_alignment = 2
 
-[node name="DisplayTorchesRemaining" type="Node" parent="Torches Remaining" node_paths=PackedStringArray("label")]
-script = ExtResource("1_eww63")
+[node name="DisplayVariableInLabel" type="Node" parent="Torches Remaining" node_paths=PackedStringArray("label")]
+script = ExtResource("2_s5d08")
 label = NodePath("..")
+variable = ExtResource("2_huq14")
 
 [node name="Interaction Display" type="Control" parent="."]
 layout_mode = 3
