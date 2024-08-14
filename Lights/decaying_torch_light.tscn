@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c06huod6isw3j"]
 
-[ext_resource type="Script" path="res://Player/Lights/TorchLightSource.gd" id="1_fq8e7"]
+[ext_resource type="Script" path="res://Lights/TorchLightSource.gd" id="1_wffjq"]
 
 [sub_resource type="Gradient" id="Gradient_ndpbp"]
 offsets = PackedFloat32Array(0, 0.687356)
@@ -21,9 +21,12 @@ radius = 206.0
 
 [node name="TorchLight" type="PointLight2D"]
 energy = 2.0
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 1.5
 texture = SubResource("GradientTexture2D_5y05d")
 texture_scale = 1.5
-script = ExtResource("1_fq8e7")
+script = ExtResource("1_wffjq")
 duration = 5.0
 minimum_light = 0.0
 minimum_radius = 0.5

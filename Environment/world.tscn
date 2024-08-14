@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://cqqxdog33fvt8"]
 
 [ext_resource type="PackedScene" uid="uid://be2f5ipwiihn5" path="res://Player/player.tscn" id="1_eyfi1"]
-[ext_resource type="Texture2D" uid="uid://dfqf7qviljs7x" path="res://white_square.png" id="2_u6ogu"]
+[ext_resource type="Texture2D" uid="uid://dfqf7qviljs7x" path="res://Environment/white_square.png" id="2_u6ogu"]
 [ext_resource type="TileSet" uid="uid://cgfw3t7dio8sq" path="res://Environment/Wall Tiles.tres" id="3_uyok4"]
 [ext_resource type="PackedScene" uid="uid://cq1n7ain4r785" path="res://Enemies/Scared of light enemy.tscn" id="4_ufreq"]
 [ext_resource type="PackedScene" uid="uid://b5pbq8nvnnfj3" path="res://Enemies/Slow in light enemy.tscn" id="5_vtreh"]
 [ext_resource type="Script" path="res://Enemy Spawner.gd" id="6_7vtgu"]
 [ext_resource type="Script" path="res://Game Control.gd" id="7_fw5gy"]
-[ext_resource type="PackedScene" uid="uid://dxxt80ic3ug5y" path="res://Enemies/State test enemy.tscn" id="8_ixafn"]
+[ext_resource type="PackedScene" uid="uid://s8jpejd63pux" path="res://Lights/torch.tscn" id="8_svojg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cdflv"]
 font_size = 50
@@ -94,6 +94,5 @@ process_mode = 3
 script = ExtResource("7_fw5gy")
 game_over_canvas = NodePath("../Game Over Canvas")
 
-[node name="State test enemy" parent="." instance=ExtResource("8_ixafn")]
-visible = false
-position = Vector2(-2, 478)
+[node name="Torch" parent="." instance=ExtResource("8_svojg")]
+position = Vector2(86, 0)

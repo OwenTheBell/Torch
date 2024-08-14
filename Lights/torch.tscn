@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://s8jpejd63pux"]
+
+[ext_resource type="PackedScene" uid="uid://c06huod6isw3j" path="res://Lights/decaying_torch_light.tscn" id="3_ed0g6"]
+[ext_resource type="Script" path="res://Interaction/InteractReceiver.gd" id="5_ciluo"]
+[ext_resource type="Script" path="res://Time Control/TickReceiver.gd" id="5_e2i6o"]
+[ext_resource type="Script" path="res://Interaction/CollisionToggle.gd" id="7_r2rjv"]
+[ext_resource type="Script" path="res://Interaction/PickupAction.gd" id="7_r6nqt"]
+[ext_resource type="Script" path="res://Interaction/ThrowAction.gd" id="8_mudjh"]
+[ext_resource type="Script" path="res://Interaction/InputReceiver.gd" id="9_supdo"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jikr2"]
+bounce = 0.5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ec6n5"]
+size = Vector2(64, 20)
+
+[node name="Torch" type="RigidBody2D"]
+collision_layer = 68
+collision_mask = 9
+physics_material_override = SubResource("PhysicsMaterial_jikr2")
+gravity_scale = 1.66533e-16
+can_sleep = false
+max_contacts_reported = 5
+contact_monitor = true
+linear_damp = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ec6n5")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(32, 10, -32, 10, -32, -10, 32, -10)
+
+[node name="decaying_torch_light" parent="." instance=ExtResource("3_ed0g6")]
+position = Vector2(31, 0)
+duration = 30.0
+
+[node name="TickReceiver" type="Node" parent="."]
+script = ExtResource("5_e2i6o")
+
+[node name="Toggle Interaction Collision" type="Node" parent="."]
+script = ExtResource("7_r2rjv")
+layer = 64
+
+[node name="PickupAction" type="Node" parent="."]
+script = ExtResource("7_r6nqt")
+
+[node name="InteractReceiver" type="Node" parent="PickupAction"]
+script = ExtResource("5_ciluo")
+
+[node name="ThrowAction" type="Node" parent="."]
+script = ExtResource("8_mudjh")
+
+[node name="PrimaryAction InputReceiver" type="Node" parent="ThrowAction"]
+script = ExtResource("9_supdo")
+input_name = "PrimaryAction"
+
+[node name="DropAction" type="Node" parent="."]
+script = ExtResource("8_mudjh")
+speed = 100
+
+[node name="SecondaryAction InputReceiver" type="Node" parent="DropAction"]
+script = ExtResource("9_supdo")
+input_name = "SecondaryAction"
+
+[connection signal="on_pickup" from="PickupAction" to="decaying_torch_light" method="extinguish"]
+[connection signal="on_pickup" from="PickupAction" to="Toggle Interaction Collision" method="toggle_off"]
+[connection signal="on_interact" from="PickupAction/InteractReceiver" to="PickupAction" method="on_interact"]
+[connection signal="on_throw" from="ThrowAction" to="Toggle Interaction Collision" method="toggle_on"]
+[connection signal="execute" from="ThrowAction/PrimaryAction InputReceiver" to="ThrowAction" method="throw"]
+[connection signal="on_throw" from="DropAction" to="Toggle Interaction Collision" method="toggle_on"]
+[connection signal="execute" from="DropAction/SecondaryAction InputReceiver" to="DropAction" method="throw"]
