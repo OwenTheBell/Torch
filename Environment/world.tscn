@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cqqxdog33fvt8"]
+[gd_scene load_steps=12 format=3 uid="uid://cqqxdog33fvt8"]
 
 [ext_resource type="PackedScene" uid="uid://be2f5ipwiihn5" path="res://Player/player.tscn" id="1_eyfi1"]
 [ext_resource type="Texture2D" uid="uid://dfqf7qviljs7x" path="res://Environment/white_square.png" id="2_u6ogu"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Enemies/Enemy Spawner.gd" id="6_7vtgu"]
 [ext_resource type="Script" path="res://Singletons & Managers/Game Control.gd" id="7_fw5gy"]
 [ext_resource type="PackedScene" uid="uid://s8jpejd63pux" path="res://Lights/torch.tscn" id="8_svojg"]
+[ext_resource type="PackedScene" uid="uid://ctdvy21seh15m" path="res://UI/game_canvas.tscn" id="9_6qnxw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cdflv"]
 font_size = 50
@@ -96,3 +97,5 @@ game_over_canvas = NodePath("../Game Over Canvas")
 
 [node name="Torch" parent="." instance=ExtResource("8_svojg")]
 position = Vector2(86, 0)
+
+[node name="Game Canvas" parent="." instance=ExtResource("9_6qnxw")]
