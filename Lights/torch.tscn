@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://s8jpejd63pux"]
+[gd_scene load_steps=11 format=3 uid="uid://s8jpejd63pux"]
 
 [ext_resource type="PackedScene" uid="uid://c06huod6isw3j" path="res://Lights/decaying_torch_light.tscn" id="3_ed0g6"]
 [ext_resource type="Script" path="res://Interaction/InteractReceiver.gd" id="5_ciluo"]
 [ext_resource type="Script" path="res://Time Control/TickReceiver.gd" id="5_e2i6o"]
 [ext_resource type="Script" path="res://Interaction/CollisionToggle.gd" id="7_r2rjv"]
 [ext_resource type="Script" path="res://Interaction/PickupAction.gd" id="7_r6nqt"]
+[ext_resource type="Script" path="res://Time Control/SendTickOnMove.gd" id="8_4sfrb"]
 [ext_resource type="Script" path="res://Interaction/ThrowAction.gd" id="8_mudjh"]
 [ext_resource type="Script" path="res://Interaction/InputReceiver.gd" id="9_supdo"]
 
@@ -62,6 +63,9 @@ speed = 100
 [node name="SecondaryAction InputReceiver" type="Node" parent="DropAction"]
 script = ExtResource("9_supdo")
 input_name = "SecondaryAction"
+
+[node name="SendTickOnMove" type="Node" parent="."]
+script = ExtResource("8_4sfrb")
 
 [connection signal="on_pickup" from="PickupAction" to="decaying_torch_light" method="extinguish"]
 [connection signal="on_pickup" from="PickupAction" to="Toggle Interaction Collision" method="toggle_off"]
