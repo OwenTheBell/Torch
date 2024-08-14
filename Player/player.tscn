@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://be2f5ipwiihn5"]
 
 [ext_resource type="Script" path="res://Player/PlayerMovement.gd" id="1_w3c8f"]
+[ext_resource type="Script" path="res://Interaction/InteractExecutor.gd" id="4_7npm5"]
 [ext_resource type="Script" path="res://Player/TorchHolder.gd" id="5_2xtvf"]
 [ext_resource type="Resource" uid="uid://ceunlfdtbqlf8" path="res://Variables/interaction_name_string.tres" id="5_6jmxb"]
 [ext_resource type="Script" path="res://Time Control/SendTickOnMove.gd" id="5_m872l"]
 [ext_resource type="Resource" uid="uid://b10h46564iadh" path="res://Variables/interaction_percent_float.tres" id="5_rtpf4"]
-[ext_resource type="Script" path="res://Interaction/InteractExecuter.gd" id="6_ypl7j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wjg20"]
 radius = 64.0
@@ -76,13 +76,13 @@ texture_scale = 0.75
 [node name="SendTickOnMove" type="Node" parent="."]
 script = ExtResource("5_m872l")
 
-[node name="InteractExecuter" type="Node" parent="."]
-script = ExtResource("6_ypl7j")
+[node name="InteractExecutor" type="Node" parent="."]
+script = ExtResource("4_7npm5")
 hold_time = 1.0
 tick_on_hold = true
 description_var = ExtResource("5_6jmxb")
 percent_var = ExtResource("5_rtpf4")
 
 [connection signal="body_entered" from="Hit Box" to="." method="_on_hit_box_body_entered"]
-[connection signal="body_entered" from="Interaction Box" to="InteractExecuter" method="_on_body_entered"]
-[connection signal="body_exited" from="Interaction Box" to="InteractExecuter" method="_on_body_exited"]
+[connection signal="body_entered" from="Interaction Box" to="InteractExecutor" method="_on_body_entered"]
+[connection signal="body_exited" from="Interaction Box" to="InteractExecutor" method="_on_body_exited"]

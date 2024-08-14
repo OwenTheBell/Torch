@@ -1,4 +1,4 @@
-class_name InteractExecuter extends Node
+class_name InteractExecutor extends Node
 
 @export var hold_time: float
 @export var tick_on_hold: bool
