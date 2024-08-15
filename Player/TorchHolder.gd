@@ -18,7 +18,7 @@ func _process(delta):
   if Inventory.held_nodes.size() == 0:
     executer.remove_receiver(self)
   else:
-    executer.add_receiver(self)
+    executer.add_receiver(self, false)
   
   if not is_instance_valid(held_torch):
     return

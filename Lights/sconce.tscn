@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cafjc37qakrvo"]
+[gd_scene load_steps=5 format=3 uid="uid://cafjc37qakrvo"]
 
 [ext_resource type="PackedScene" uid="uid://c06huod6isw3j" path="res://Lights/decaying_torch_light.tscn" id="1_qdpx3"]
+[ext_resource type="Script" path="res://Interaction/toggle_polygon2d_color.gd" id="2_bc603"]
 [ext_resource type="Script" path="res://Interaction/InteractReceiver.gd" id="2_jy8lh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1cxv"]
@@ -26,10 +27,17 @@ shape = SubResource("RectangleShape2D_j1cxv")
 color = Color(0.55, 0, 1, 1)
 polygon = PackedVector2Array(32, 2.08165e-12, 2.08165e-12, 32, -32, 2.08165e-12, 2.08165e-12, -32)
 
+[node name="TogglePolygon2DColor" type="Node" parent="Polygon2D" node_paths=PackedStringArray("polygon")]
+script = ExtResource("2_bc603")
+color = Color(1, 0.783333, 0, 1)
+polygon = NodePath("..")
+
 [node name="Node" type="Node" parent="."]
 
 [node name="InteractReceiver" type="Node" parent="Node"]
 script = ExtResource("2_jy8lh")
 interact_description = "Ignite"
 
+[connection signal="on_extinguish" from="TorchLight" to="Polygon2D/TogglePolygon2DColor" method="show_base_color"]
+[connection signal="on_ignited" from="TorchLight" to="Polygon2D/TogglePolygon2DColor" method="show_alt_color"]
 [connection signal="on_interact" from="Node/InteractReceiver" to="TorchLight" method="ignite"]

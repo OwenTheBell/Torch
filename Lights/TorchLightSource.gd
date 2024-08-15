@@ -1,5 +1,6 @@
 class_name TorchLightSource extends PointLight2D
 
+signal on_ignited
 signal on_extinguish
 
 @export var start_lit: bool = false
@@ -35,6 +36,7 @@ func on_tick(delta):
 func ignite():
   is_lit = true
   update_light()
+  on_ignited.emit()
 
 
 func extinguish():
