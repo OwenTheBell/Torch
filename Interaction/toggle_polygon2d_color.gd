@@ -6,8 +6,7 @@ extends Node
 
 var _base_color: Color
 
-
-func _ready():
+func _enter_tree():
   _base_color = polygon.color
 
 

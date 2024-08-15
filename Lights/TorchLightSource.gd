@@ -9,41 +9,43 @@ signal on_extinguish
 @export_range(0.0, 1.0) var minimum_light: float = 1.0
 @export_range(0.0, 1.0) var minimum_radius: float = 1.0
 
-var remaining_time
-var is_lit = false
-
-var starting_scale
-var starting_energy
+var _remaining_time
+var _is_lit = false
+var _starting_scale
+var _starting_energy
 
 func _ready():
-  is_lit = true
-  remaining_time = duration
-  starting_scale = scale
-  starting_energy = energy
-    
+  _remaining_time = duration
+  _starting_scale = scale
+  _starting_energy = energy
+  if start_lit:
+    ignite()
+  else:
+    extinguish()
 
+    
 func on_tick(delta):
-  if not is_lit:
+  if not _is_lit:
     return
-  remaining_time -= delta
+  _remaining_time -= delta
   update_light()
 
 
 func ignite():
-  is_lit = true
+  _is_lit = true
   update_light()
   on_ignited.emit()
 
 
 func extinguish():
-  is_lit = false
+  _is_lit = false
   energy = 0
   scale = Vector2.ZERO
   on_extinguish.emit()
 
 
 func update_light():
-  var percent_radius = (1 - minimum_radius) * (remaining_time / duration) + minimum_radius
-  scale = starting_scale * percent_radius
-  var percent_energy = (1 - minimum_light) * (remaining_time / duration) + minimum_light
-  energy = starting_energy * percent_energy
+  var percent_radius = (1 - minimum_radius) * (_remaining_time / duration) + minimum_radius
+  scale = _starting_scale * percent_radius
+  var percent_energy = (1 - minimum_light) * (_remaining_time / duration) + minimum_light
+  energy = _starting_energy * percent_energy

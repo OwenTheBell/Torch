@@ -1,47 +1,41 @@
-[gd_scene load_steps=5 format=3 uid="uid://cafjc37qakrvo"]
+[gd_scene load_steps=5 format=3 uid="uid://b3hhyw3rw2whe"]
 
-[ext_resource type="PackedScene" uid="uid://c06huod6isw3j" path="res://Lights/decaying_torch_light.tscn" id="1_qdpx3"]
-[ext_resource type="Script" path="res://Interaction/toggle_polygon2d_color.gd" id="2_bc603"]
-[ext_resource type="Script" path="res://Interaction/InteractReceiver.gd" id="2_jy8lh"]
+[ext_resource type="PackedScene" uid="uid://c06huod6isw3j" path="res://Lights/decaying_torch_light.tscn" id="1_5orp0"]
+[ext_resource type="Script" path="res://Interaction/toggle_polygon2d_color.gd" id="2_k45wq"]
+[ext_resource type="Script" path="res://Interaction/InteractReceiver.gd" id="3_5hfd0"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j1cxv"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnbp8"]
 size = Vector2(50, 50)
 
-[node name="Sconce" type="Node2D"]
+[node name="SconceBody" type="StaticBody2D"]
+collision_layer = 65
+collision_mask = 0
 
-[node name="TorchLight" parent="." instance=ExtResource("1_qdpx3")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_nnbp8")
+
+[node name="TorchLight" parent="." instance=ExtResource("1_5orp0")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(2, 2)
 decay = true
 duration = 60.0
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 65
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-rotation = 0.785398
-shape = SubResource("RectangleShape2D_j1cxv")
-
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
-collision_layer = 65
-collision_mask = 0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color(0.55, 0, 1, 1)
 polygon = PackedVector2Array(32, 2.08165e-12, 2.08165e-12, 32, -32, 2.08165e-12, 2.08165e-12, -32)
 
 [node name="TogglePolygon2DColor" type="Node" parent="Polygon2D" node_paths=PackedStringArray("polygon")]
-script = ExtResource("2_bc603")
+script = ExtResource("2_k45wq")
 color = Color(1, 0.783333, 0, 1)
 polygon = NodePath("..")
 
 [node name="Ignite InteractReceiver" type="Node" parent="."]
-script = ExtResource("2_jy8lh")
+script = ExtResource("3_5hfd0")
 interact_description = "Ignite"
 
 [node name="Extinguish InteractReceiver" type="Node" parent="."]
-script = ExtResource("2_jy8lh")
+script = ExtResource("3_5hfd0")
 interact_description = "Extinguish"
 
 [connection signal="on_extinguish" from="TorchLight" to="Polygon2D/TogglePolygon2DColor" method="show_base_color"]
