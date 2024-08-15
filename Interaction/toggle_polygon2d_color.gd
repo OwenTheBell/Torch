@@ -16,5 +16,4 @@ func show_alt_color():
 
 
 func show_base_color():
-  if is_instance_valid(_base_color):
-    polygon.color = _base_color
+  polygon.color = _base_color

@@ -20,10 +20,6 @@ func _ready():
   remaining_time = duration
   starting_scale = scale
   starting_energy = energy
-  if start_lit:
-    ignite()
-  else:
-    extinguish()
     
 
 func on_tick(delta):

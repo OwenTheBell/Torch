@@ -16,13 +16,11 @@ func entered_executor(executor: InteractExecutor):
   _executor = executor
   if enabled:
     executor.add_receiver(self)
-  pass
 
 
 func exited_executor(executor: InteractExecutor):
   _executor = null
   executor.remove_receiver(self)
-  pass
 
 
 func enable():
