@@ -4,6 +4,8 @@ signal on_interact
 
 @export var interact_description: String
 
+var enabled: bool = true
+
 var _executor: InteractExecutor
 
 func interact():
@@ -12,10 +14,24 @@ func interact():
 
 func entered_executor(executor: InteractExecutor):
   _executor = executor
-  executor.add_receiver(self)
+  if enabled:
+    executor.add_receiver(self)
   pass
 
 
 func exited_executor(executor: InteractExecutor):
+  _executor = null
   executor.remove_receiver(self)
   pass
+
+
+func enable():
+  if not enabled and is_instance_valid(_executor):
+    _executor.add_receiver(self)
+  enabled = true
+
+
+func disable():
+  if enabled and is_instance_valid(_executor):
+    _executor.remove_receiver(self)
+  enabled = false

@@ -32,12 +32,19 @@ script = ExtResource("2_bc603")
 color = Color(1, 0.783333, 0, 1)
 polygon = NodePath("..")
 
-[node name="Node" type="Node" parent="."]
-
-[node name="InteractReceiver" type="Node" parent="Node"]
+[node name="ignite_InteractReceiver" type="Node" parent="."]
 script = ExtResource("2_jy8lh")
 interact_description = "Ignite"
 
+[node name="extinguish_InteractReceiver" type="Node" parent="."]
+script = ExtResource("2_jy8lh")
+interact_description = "Extinguish"
+
 [connection signal="on_extinguish" from="TorchLight" to="Polygon2D/TogglePolygon2DColor" method="show_base_color"]
+[connection signal="on_extinguish" from="TorchLight" to="ignite_InteractReceiver" method="enable"]
+[connection signal="on_extinguish" from="TorchLight" to="extinguish_InteractReceiver" method="disable"]
 [connection signal="on_ignited" from="TorchLight" to="Polygon2D/TogglePolygon2DColor" method="show_alt_color"]
-[connection signal="on_interact" from="Node/InteractReceiver" to="TorchLight" method="ignite"]
+[connection signal="on_ignited" from="TorchLight" to="ignite_InteractReceiver" method="disable"]
+[connection signal="on_ignited" from="TorchLight" to="extinguish_InteractReceiver" method="enable"]
+[connection signal="on_interact" from="ignite_InteractReceiver" to="TorchLight" method="ignite"]
+[connection signal="on_interact" from="extinguish_InteractReceiver" to="TorchLight" method="extinguish"]
