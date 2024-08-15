@@ -27,6 +27,7 @@ shadow_filter_smooth = 1.5
 texture = SubResource("GradientTexture2D_5y05d")
 texture_scale = 1.5
 script = ExtResource("1_wffjq")
+decay = false
 duration = 5.0
 minimum_light = 0.0
 minimum_radius = 0.5

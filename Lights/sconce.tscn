@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://cafjc37qakrvo"]
+
+[ext_resource type="PackedScene" uid="uid://c06huod6isw3j" path="res://Lights/decaying_torch_light.tscn" id="1_qdpx3"]
+[ext_resource type="Script" path="res://Interaction/InteractReceiver.gd" id="2_jy8lh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j1cxv"]
+size = Vector2(50, 50)
+
+[node name="Sconce" type="Node2D"]
+
+[node name="TorchLight" parent="." instance=ExtResource("1_qdpx3")]
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(2, 2)
+decay = true
+duration = 60.0
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_j1cxv")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.55, 0, 1, 1)
+polygon = PackedVector2Array(32, 2.08165e-12, 2.08165e-12, 32, -32, 2.08165e-12, 2.08165e-12, -32)
+
+[node name="Node" type="Node" parent="."]
+
+[node name="InteractReceiver" type="Node" parent="Node"]
+script = ExtResource("2_jy8lh")
+interact_description = "Ignite"
+
+[connection signal="on_interact" from="Node/InteractReceiver" to="TorchLight" method="ignite"]

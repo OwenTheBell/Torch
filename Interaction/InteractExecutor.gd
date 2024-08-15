@@ -40,6 +40,18 @@ func _on_body_exited(body):
     remove_receiver(node)
 
 
+func _on_area_entered(area: Area2D):
+  var receiver = area.get_parent().find_child("InteractReceiver")
+  if is_instance_valid(receiver):
+    add_receiver(receiver)
+
+
+func _on_area_exited(area: Area2D):
+  var receiver = area.get_parent().find_child("InteractReceiver")
+  if is_instance_valid(receiver):
+    remove_receiver(receiver)
+
+
 func add_receiver(receiver: Node, priority = false):
   if receivers.find(receiver) >= 0:
     return

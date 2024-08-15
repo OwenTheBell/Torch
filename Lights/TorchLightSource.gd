@@ -2,6 +2,8 @@ class_name TorchLightSource extends PointLight2D
 
 signal on_extinguish
 
+@export var start_lit: bool = false
+@export var decay: bool = true
 @export var duration: float = 100
 @export_range(0.0, 1.0) var minimum_light: float = 1.0
 @export_range(0.0, 1.0) var minimum_radius: float = 1.0
@@ -17,7 +19,10 @@ func _ready():
   remaining_time = duration
   starting_scale = scale
   starting_energy = energy
-  extinguish()
+  if start_lit:
+    ignite()
+  else:
+    extinguish()
     
 
 func on_tick(delta):
