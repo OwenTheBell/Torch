@@ -29,19 +29,23 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-  body.propagate_call("entered_executor", [self])
+  var owner = Helper.get_scene_root(body)
+  owner.propagate_call("entered_executor", [self])
 
 
 func _on_body_exited(body):
-  body.propagate_call("exited_executor", [self])
+  var owner = Helper.get_scene_root(body)
+  owner.propagate_call("exited_executor", [self])
 
 
 func _on_area_entered(area: Area2D):
-  area.owner.propagate_call("entered_executor", [self])
+  var owner = Helper.get_scene_root(area)
+  owner.propagate_call("entered_executor", [self])
 
 
 func _on_area_exited(area: Area2D):
-  area.owner.propagate_call("exited_executor", [self])
+  var owner = Helper.get_scene_root(area)
+  owner.propagate_call("exited_executor", [self])
 
 
 func add_receiver(receiver: Node, priority = true):
