@@ -12,10 +12,10 @@ func base_setup():
     var transition = child as EnemyStateTransition
     transition.setup(enemy)
     transitions.append(transition)
-  setup()
+  _setup()
 
 
-func setup():
+func _setup():
   pass
 
 
@@ -23,17 +23,17 @@ func can_enter():
   return false
 
 
-func enter():
+func _enter():
   pass
 
 
-func exit():
+func _exit():
   pass
 
 
-func process(delta):
+func _update_state(delta):
   pass
 
 
-func physics_process(delta):
+func _physics_update_state(delta):
   pass

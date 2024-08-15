@@ -3,40 +3,40 @@ class_name RunAwayFromCollisionState extends EnemyState
 @export var collision_layer: int
 @export var speed: float
 
-var target: Node2D
-var area: Area2D
-var scary_collisions: Array[Node2D]
+var _target: Node2D
+var _area: Area2D
+var _scary_collisions: Array[Node2D]
 
-func setup():
-  area = enemy.get_node("Area2D")
-  area.area_entered.connect(area_entered)
-  area.area_exited.connect(area_exited)
+func _setup():
+  _area = enemy.get_node("Area2D")
+  _area.area_entered.connect(area_entered)
+  _area.area_exited.connect(area_exited)
 
 
-func can_enter():
-  for area in area.get_overlapping_areas():
-    if area.get_collision_layer_value(collision_layer):
-      target = area.get_parent()
+func _can_enter():
+  for overlapping_area in _area.get_overlapping_areas():
+    if overlapping_area.get_collision_layer_value(collision_layer):
+      _target = overlapping_area.get_parent()
       return true
   return false
 
 
-func enter():
+func _enter():
   pass
 
 
-func exit():
+func _exit():
   pass
   
   
-func process(delta):
-  if not is_instance_valid(target):
-    target = player
+func _update_state(delta):
+  if not is_instance_valid(_target):
+    _target = player
   var direction = Vector2.ZERO
-  if scary_collisions.size() > 0:
-    for node in scary_collisions:
+  if _scary_collisions.size() > 0:
+    for node in _scary_collisions:
       direction += (enemy.global_position - node.global_position).normalized()
-    direction /= scary_collisions.size()
+    direction /= _scary_collisions.size()
   else:
     direction = (enemy.global_position - player.global_position).normalized()
   enemy.velocity = direction * speed
@@ -46,10 +46,10 @@ func process(delta):
 
 func area_entered(area):
   if area.get_collision_layer_value(collision_layer):
-    scary_collisions.append(area)
+    _scary_collisions.append(area)
 
 func area_exited(area):
   if area.get_collision_layer_value(collision_layer):
-    var index = scary_collisions.find(area)
+    var index = _scary_collisions.find(area)
     if index >= 0:
-      scary_collisions.remove_at(index)
+      _scary_collisions.remove_at(index)

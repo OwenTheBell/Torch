@@ -11,7 +11,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func process(delta):
+func _update_state(delta):
   var members = get_tree().get_nodes_in_group(group)
   if members.size() == 0:
     return

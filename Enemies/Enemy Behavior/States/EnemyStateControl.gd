@@ -20,15 +20,15 @@ func _ready():
 
 
 func on_tick(delta):
-  activeState.process(delta)
+  activeState._update_state(delta)
   for transition in activeState.transitions:
     if transition.check(delta):
       change_state(activeState, transition.ToState)
       break
 
 func change_state(from: EnemyState, to: EnemyState):
-  from.exit()
+  from._exit()
   for transition in from.transitions:
     transition.reset()
-  to.enter()
+  to._enter()
   activeState = to
