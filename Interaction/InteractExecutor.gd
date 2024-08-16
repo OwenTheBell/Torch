@@ -40,11 +40,11 @@ func _on_body_exited(body):
 
 
 func _on_area_entered(area: Area2D):
-  area.get_parent().propagate_call("entered_executor", [self])
+  area.propagate_call("entered_executor", [self])
 
 
 func _on_area_exited(area: Area2D):
-  area.get_parent().propagate_call("exited_executor", [self])
+  area.propagate_call("exited_executor", [self])
 
 
 func add_receiver(receiver: Node, priority = true):

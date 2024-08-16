@@ -25,6 +25,14 @@ shape = SubResource("RectangleShape2D_nnbp8")
 script = ExtResource("1_dn75h")
 with_group = "burning"
 
+[node name="Ignite InteractReceiver" type="Node" parent="Interaction Box"]
+script = ExtResource("3_5hfd0")
+interact_description = "Ignite"
+
+[node name="Extinguish InteractReceiver" type="Node" parent="Interaction Box"]
+script = ExtResource("3_5hfd0")
+interact_description = "Extinguish"
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_mask = 0
 
@@ -47,20 +55,12 @@ script = ExtResource("2_k45wq")
 color = Color(1, 0.783333, 0, 1)
 polygon = NodePath("..")
 
-[node name="Ignite InteractReceiver" type="Node" parent="."]
-script = ExtResource("3_5hfd0")
-interact_description = "Ignite"
-
-[node name="Extinguish InteractReceiver" type="Node" parent="."]
-script = ExtResource("3_5hfd0")
-interact_description = "Extinguish"
-
 [connection signal="on_collision" from="Interaction Box/Signal on Collision with burning" to="TorchLight" method="ignite"]
+[connection signal="on_interact" from="Interaction Box/Ignite InteractReceiver" to="TorchLight" method="ignite"]
+[connection signal="on_interact" from="Interaction Box/Extinguish InteractReceiver" to="TorchLight" method="extinguish"]
 [connection signal="on_extinguish" from="TorchLight" to="Polygon2D/TogglePolygon2DColor" method="show_base_color"]
-[connection signal="on_extinguish" from="TorchLight" to="Ignite InteractReceiver" method="enable"]
-[connection signal="on_extinguish" from="TorchLight" to="Extinguish InteractReceiver" method="disable"]
+[connection signal="on_extinguish" from="TorchLight" to="Interaction Box/Ignite InteractReceiver" method="enable"]
+[connection signal="on_extinguish" from="TorchLight" to="Interaction Box/Extinguish InteractReceiver" method="disable"]
 [connection signal="on_ignited" from="TorchLight" to="Polygon2D/TogglePolygon2DColor" method="show_alt_color"]
-[connection signal="on_ignited" from="TorchLight" to="Ignite InteractReceiver" method="disable"]
-[connection signal="on_ignited" from="TorchLight" to="Extinguish InteractReceiver" method="enable"]
-[connection signal="on_interact" from="Ignite InteractReceiver" to="TorchLight" method="ignite"]
-[connection signal="on_interact" from="Extinguish InteractReceiver" to="TorchLight" method="extinguish"]
+[connection signal="on_ignited" from="TorchLight" to="Interaction Box/Ignite InteractReceiver" method="disable"]
+[connection signal="on_ignited" from="TorchLight" to="Interaction Box/Extinguish InteractReceiver" method="enable"]
