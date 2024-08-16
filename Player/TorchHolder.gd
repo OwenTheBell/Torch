@@ -10,7 +10,7 @@ var executer: InteractExecutor
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-  executer = get_parent().get_node("InteractExecutor") as InteractExecutor
+  executer = get_node("%InteractExecutor") as InteractExecutor
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

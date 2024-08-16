@@ -79,6 +79,7 @@ texture_scale = 0.75
 script = ExtResource("5_m872l")
 
 [node name="InteractExecutor" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("4_7npm5")
 hold_time = 1.0
 tick_on_hold = true
