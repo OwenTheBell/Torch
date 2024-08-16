@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Enemies/Enemy Behavior/States/EnemyStateControl.gd" id="2_3jrmk"]
 [ext_resource type="Script" path="res://Enemies/Enemy Behavior/States/MoveTowardsGroupState.gd" id="3_i55bc"]
-[ext_resource type="Script" path="res://Enemies/Enemy Behavior/Transitions/EnterExitTransition.gd" id="4_chmx5"]
+[ext_resource type="Script" path="res://Enemies/Enemy Behavior/Transitions/enter_exit_transition.gd" id="4_chmx5"]
 [ext_resource type="Script" path="res://Enemies/Enemy Behavior/States/RunAwayFromCollisionState.gd" id="5_1rvwg"]
 [ext_resource type="Script" path="res://Enemies/Enemy Behavior/Transitions/distance_from_group_transition.gd" id="6_q0ggo"]
 [ext_resource type="Script" path="res://Time Control/TickReceiver.gd" id="7_btvos"]
