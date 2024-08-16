@@ -25,6 +25,9 @@ func _process(delta):
       receivers[receivers.size() - 1].interact()
       elapsed_hold = 0
       executing = false
+  if Input.is_action_just_released("Interact"):
+    executing = false
+    elapsed_hold = 0
   percent_var.value = elapsed_hold / hold_time
 
 

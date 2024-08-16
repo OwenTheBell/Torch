@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b3hhyw3rw2whe"]
 
 [ext_resource type="PackedScene" uid="uid://c06huod6isw3j" path="res://Lights/decaying_torch_light.tscn" id="1_5orp0"]
-[ext_resource type="Script" path="res://Interaction/signal_on_collision.gd" id="1_r8a0y"]
+[ext_resource type="Script" path="res://Interaction/signal_on_collision.gd" id="1_dn75h"]
 [ext_resource type="Script" path="res://Interaction/toggle_polygon2d_color.gd" id="2_k45wq"]
 [ext_resource type="Script" path="res://Interaction/InteractReceiver.gd" id="3_5hfd0"]
 
@@ -22,7 +22,7 @@ rotation = 0.785398
 shape = SubResource("RectangleShape2D_nnbp8")
 
 [node name="Signal on Collision with burning" type="Node" parent="Interaction Box"]
-script = ExtResource("1_r8a0y")
+script = ExtResource("1_dn75h")
 with_group = "burning"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
