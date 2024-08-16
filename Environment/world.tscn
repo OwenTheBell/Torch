@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cqqxdog33fvt8"]
+[gd_scene load_steps=13 format=3 uid="uid://cqqxdog33fvt8"]
 
 [ext_resource type="PackedScene" uid="uid://be2f5ipwiihn5" path="res://Player/player.tscn" id="1_eyfi1"]
 [ext_resource type="Texture2D" uid="uid://dfqf7qviljs7x" path="res://Environment/white_square.png" id="2_u6ogu"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Singletons & Managers/Game Control.gd" id="7_fw5gy"]
 [ext_resource type="PackedScene" uid="uid://s8jpejd63pux" path="res://Lights/torch.tscn" id="8_svojg"]
 [ext_resource type="PackedScene" uid="uid://ctdvy21seh15m" path="res://UI/game_canvas.tscn" id="9_6qnxw"]
+[ext_resource type="PackedScene" uid="uid://b3hhyw3rw2whe" path="res://Lights/sconce.tscn" id="10_4dnv2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cdflv"]
 font_size = 50
@@ -99,3 +100,6 @@ game_over_canvas = NodePath("../Game Over Canvas")
 position = Vector2(86, 0)
 
 [node name="Game Canvas" parent="." instance=ExtResource("9_6qnxw")]
+
+[node name="Sconce" parent="." instance=ExtResource("10_4dnv2")]
+position = Vector2(-209, -206)
