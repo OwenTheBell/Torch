@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Enemies/Enemy Behavior/Transitions/EnterExitTransition.gd" id="3_bcsn4"]
 [ext_resource type="Script" path="res://Enemies/Enemy Behavior/States/RunAwayFromCollisionState.gd" id="4_hqjwl"]
 [ext_resource type="Script" path="res://Time Control/TickReceiver.gd" id="6_f71vu"]
-[ext_resource type="Script" path="res://Enemies/Enemy Behavior/Transitions/DistanceFromGroupTransition.gd" id="6_kan6v"]
+[ext_resource type="Script" path="res://Enemies/Enemy Behavior/Transitions/distance_from_group_transition.gd" id="6_kan6v"]
 [ext_resource type="Script" path="res://Enemies/Enemy Behavior/GameOverOnContactWithPlayer.gd" id="7_jlfam"]
 
 [node name="State test enemy" type="CharacterBody2D"]

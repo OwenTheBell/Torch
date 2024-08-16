@@ -12,9 +12,7 @@ func _ready():
   player = get_node("/root/World/Player") as CharacterBody2D
   for child in find_children("", "EnemyState"):
     var state = child as EnemyState
-    state.enemy = enemy
-    state.player = player
-    state.base_setup()
+    state.base_setup(enemy, player)
     states.append(state)
   activeState = states[0]
 

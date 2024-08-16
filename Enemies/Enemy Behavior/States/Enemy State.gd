@@ -7,7 +7,10 @@ var transitions: Array[EnemyStateTransition]
 func _ready():
   pass
 
-func base_setup():
+
+func base_setup(enemy: CharacterBody2D, player: CharacterBody2D):
+  self.enemy = enemy
+  self.player = player
   for child in find_children("", "EnemyStateTransition"):
     var transition = child as EnemyStateTransition
     transition.setup(enemy)
