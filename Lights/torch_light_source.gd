@@ -35,6 +35,7 @@ func ignite():
   _is_lit = true
   update_light()
   get_parent().add_to_group("burning")
+  add_to_group("illuminated light source")
   on_ignited.emit()
 
 
@@ -43,6 +44,7 @@ func extinguish():
   energy = 0
   scale = Vector2.ZERO
   get_parent().remove_from_group("burning")
+  remove_from_group("illuminated light source")
   on_extinguish.emit()
 
 
