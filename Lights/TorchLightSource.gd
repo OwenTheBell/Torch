@@ -34,6 +34,7 @@ func on_tick(delta):
 func ignite():
   _is_lit = true
   update_light()
+  get_parent().add_to_group("burning")
   on_ignited.emit()
 
 
@@ -41,6 +42,7 @@ func extinguish():
   _is_lit = false
   energy = 0
   scale = Vector2.ZERO
+  get_parent().remove_from_group("burning")
   on_extinguish.emit()
 
 
