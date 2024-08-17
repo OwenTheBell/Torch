@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://cr02gr38fudlv"]
+
+[ext_resource type="Script" path="res://Enemies/Enemy Behavior/States/EnemyStateControl.gd" id="1_t881y"]
+[ext_resource type="Script" path="res://Enemies/Enemy Behavior/States/MoveTowardsGroupState.gd" id="2_wmsvc"]
+[ext_resource type="Script" path="res://Time Control/TickReceiver.gd" id="3_t3ywc"]
+[ext_resource type="Script" path="res://Enemies/Enemy Behavior/sap_overlapped_light.gd" id="4_tuj4r"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_65u6u"]
+radius = 8.0
+height = 64.0
+
+[node name="LightSuckerEnemy" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+motion_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_65u6u")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.152941, 1, 1, 0.662745)
+polygon = PackedVector2Array(32, 10, 32, -10, -32, 2.08165e-12)
+
+[node name="EnemyStateControl" type="Node" parent="."]
+script = ExtResource("1_t881y")
+
+[node name="Move towards illumination" type="Node" parent="EnemyStateControl"]
+script = ExtResource("2_wmsvc")
+group = "illumination"
+closest_only = true
+speed = 320.0
+
+[node name="TickReceiver" type="Node" parent="."]
+script = ExtResource("3_t3ywc")
+
+[node name="Light detector" type="Area2D" parent="."]
+collision_layer = 79
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Light detector"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_65u6u")
+
+[node name="SappedOverlappedLight" type="Node" parent="Light detector"]
+script = ExtResource("4_tuj4r")
+sap_per_second = 2
