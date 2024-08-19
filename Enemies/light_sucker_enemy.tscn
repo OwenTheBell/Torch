@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cr02gr38fudlv"]
+[gd_scene load_steps=7 format=3 uid="uid://cr02gr38fudlv"]
 
 [ext_resource type="Script" path="res://Enemies/Enemy Behavior/States/EnemyStateControl.gd" id="1_t881y"]
 [ext_resource type="Script" path="res://Enemies/Enemy Behavior/States/MoveTowardsGroupState.gd" id="2_wmsvc"]
+[ext_resource type="Script" path="res://Enemies/Enemy Behavior/Transitions/members_in_group_transition.gd" id="3_4y6l5"]
 [ext_resource type="Script" path="res://Time Control/TickReceiver.gd" id="3_t3ywc"]
 [ext_resource type="Script" path="res://Enemies/Enemy Behavior/sap_overlapped_light.gd" id="4_tuj4r"]
 
@@ -31,6 +32,22 @@ group = "illumination"
 closest_only = true
 speed = 320.0
 
+[node name="No illumination transition" type="Node" parent="EnemyStateControl/Move towards illumination" node_paths=PackedStringArray("ToState")]
+script = ExtResource("3_4y6l5")
+group = "illumination"
+comparison = 1
+ToState = NodePath("../../Move towards spawn point")
+
+[node name="Move towards spawn point" type="Node" parent="EnemyStateControl"]
+script = ExtResource("2_wmsvc")
+group = "enemy spawn"
+speed = 320.0
+
+[node name="Illumination transition" type="Node" parent="EnemyStateControl/Move towards spawn point" node_paths=PackedStringArray("ToState")]
+script = ExtResource("3_4y6l5")
+group = "illumination"
+ToState = NodePath("../../Move towards illumination")
+
 [node name="TickReceiver" type="Node" parent="."]
 script = ExtResource("3_t3ywc")
 
@@ -41,6 +58,6 @@ collision_layer = 79
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_65u6u")
 
-[node name="SappedOverlappedLight" type="Node" parent="Light detector"]
+[node name="SapOverlappedLight" type="Node" parent="Light detector"]
 script = ExtResource("4_tuj4r")
 sap_per_second = 2

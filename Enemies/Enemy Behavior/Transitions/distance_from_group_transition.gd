@@ -2,8 +2,8 @@ class_name DistanceFromGroupTransition extends EnemyStateTransition
 
 @export var group: String
 @export var closest_only: bool
-enum ComparisionType {FurtherThan, CloserThan}
-@export var comparision: ComparisionType
+enum ComparisonType {FurtherThan, CloserThan}
+@export var comparision: ComparisonType
 @export var distance: float
 @export var raycasted: bool
 @export_flags_2d_physics var ray_mask: int
@@ -14,9 +14,9 @@ func check(delta):
   _members = get_tree().get_nodes_in_group(group)
   if _members.size() == 0:
     return false
-  if comparision == ComparisionType.FurtherThan:
+  if comparision == ComparisonType.FurtherThan:
     return distance < get_distance()
-  elif comparision == ComparisionType.CloserThan:
+  elif comparision == ComparisonType.CloserThan:
     return distance > get_distance()
   return false
 

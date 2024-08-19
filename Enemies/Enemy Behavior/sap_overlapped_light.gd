@@ -1,4 +1,4 @@
-class_name SappedOverlappedLight
+class_name SapOverlappedLight
 extends Node
 
 @export var sap_per_second: int
